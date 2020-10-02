@@ -4,7 +4,7 @@ using UnityEngine;
 public class DialogManager : MonoBehaviour
 {
     public TextMeshProUGUI text;
-    public Dialog dialog;
+    public Dialog currentDialog;
 
     public bool startOnAwake = false;
 
@@ -17,15 +17,22 @@ public class DialogManager : MonoBehaviour
     }
 
 
-    public float lettersAppearSpeedProSec = 2;
+    float lettersAppearSpeedProSec = 2;
     int lastSchownLetterIndex = 0, currentMessageLenght = 0;
     int currentMessageIndex = -1;
     string nextMessage;
 
     float t;
 
+    public static DialogManager instance;
+
     private void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this);
+
         if (!startOnAwake)
             gameObject.SetActive(false);
     }
@@ -55,14 +62,14 @@ public class DialogManager : MonoBehaviour
         }
         else
         {
-            if(currentMessageIndex == dialog.messages.Length - 1)
+            if(currentMessageIndex == currentDialog.messages.Length - 1)
             {
                 gameObject.SetActive(false);
                 return;
             }
 
             lastSchownLetterIndex = -1;
-            nextMessage = dialog.messages[++currentMessageIndex];
+            nextMessage = currentDialog.messages[++currentMessageIndex];
             currentMessageLenght = nextMessage.Length;
             t = 0;
         }
@@ -74,4 +81,17 @@ public class DialogManager : MonoBehaviour
         text.text = nextMessage.Substring(0, lastSchownLetterIndex + 1);
     }
 
+
+    //To Do (Ivan): make better initialisation
+    public void ShowDialog(Dialog dialog)
+    {
+        
+        currentDialog = dialog;
+        lettersAppearSpeedProSec = dialog.speed;
+        lastSchownLetterIndex = 0; currentMessageLenght = 0;
+        currentMessageIndex = -1;
+        t = 0;
+        gameObject.SetActive(true);
+        NextMessage();
+    }
 }

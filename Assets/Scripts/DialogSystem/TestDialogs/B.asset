@@ -10,6 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a6a8639b28ecf84b8cc0a0994542c42, type: 3}
-  m_Name: A
+  m_Name: B
   m_EditorClassIdentifier: 
-  messages: []
+  messages:
+  - 'Hi! '
+  - It's Dialog Point B
+  - What did you heard in dialog A?
+  speed: 15

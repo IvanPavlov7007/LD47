@@ -4,4 +4,5 @@
 public class Dialog : ScriptableObject
 {
     public string[] messages;
+    public float speed = 15;
 }
