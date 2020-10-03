@@ -10,13 +10,14 @@ public class Node : MonoBehaviour
 
     public Rigidbody childRB;
 
-    public float initMaxDist, maxDist, anglesToRopeLength;
+    public float initMaxDist, maxDist, anglesToRopeLength = 0.01f;
 
     public bool clockDirectionLeft = true, isRoot = false;
 
     public virtual void Start()
     {
-        rope = GetComponentInChildren<CableProceduralSimple>(true);
+        if(rope == null)
+            rope = GetComponentInChildren<CableProceduralSimple>(true);
         if (_child != null)
         {
             _child._parent = this;
@@ -49,6 +50,18 @@ public class Node : MonoBehaviour
         _parent = parent;
     }
 
+    float entranceAngle;
+
+    public static Node CreateNewNode(Node existend)
+    {
+        var rope = Instantiate(GameManager.instance.RopeDrawerPrefab, existend.transform).GetComponent<CableProceduralSimple>() ;
+        Node n = existend.gameObject.AddComponent<Node>();
+        n.createdNode = true;
+        n.rope = rope;
+        //n.Start();
+        return n;
+    }
+
     public virtual void SetChild(Node child)
     {
         _child = child;
@@ -56,9 +69,12 @@ public class Node : MonoBehaviour
         //maxDist = dist.magnitude;
         if (_parent != null)
         { 
-        initMaxDist = _parent.initMaxDist - (transform.position - _parent.transform.position).magnitude;
-        maxDist = initMaxDist;
+            initMaxDist = _parent.initMaxDist - (transform.position - _parent.transform.position).magnitude;
+            if(maxDist == 0f)
+                maxDist = initMaxDist;
+            entranceAngle = Vector3.SignedAngle(Vector3.forward, dist, transform.up);
         }
+        rope.sagAmplitude = 0f;
         rope.endPointTransform = child.transform;
         rope.gameObject.SetActive(true);
         childRB = child.GetComponent<Rigidbody>();
@@ -73,6 +89,8 @@ public class Node : MonoBehaviour
         if (childRB == null || childRB.isKinematic)
             return;
 
+        
+
         Vector3 newDist = childRB.position - transform.position;
         float dif = Vector3.SignedAngle(dist, newDist, transform.up) * anglesToRopeLength;
 
@@ -83,30 +101,46 @@ public class Node : MonoBehaviour
             Node n = hit.transform.GetComponent<Node>();
             if (n != _child)
             {
-                if(n._child != null)
+                if (n._child != null)
+                {
+                    n = CreateNewNode(n);
+                }
 
                 n.ConnectWithTarget(_child);
                 n.clockDirectionLeft = dif < 0;
+
                 return;
             }
         }
 
         
         dif *= clockDirectionLeft ? 1f : -1f;
-        maxDist = Mathf.Max(1f, maxDist + dif);
+        maxDist = Mathf.Max(0.4f, maxDist + dif);
+        if (createdNode)
+            Debug.Log("Hi");
         if (maxDist > initMaxDist)
         {
             maxDist = initMaxDist;
-            if(!isRoot)
+            float exitAngle = Vector3.SignedAngle(Vector3.forward, dist, transform.up);
+
+            //TODO: Fix sometimes can't get out of tree
+            if (!isRoot)// ((exitAngle > entranceAngle && !clockDirectionLeft) || (exitAngle <= entranceAngle && clockDirectionLeft))
             {
                 DisconnectFromRope();
-                rope.gameObject.SetActive(false);
+                if(createdNode)
+                {
+                    Destroy(rope.gameObject);
+                    Destroy(this);
+                }
+                else
+                    rope.gameObject.SetActive(false);
                 return;
             }
             clockDirectionLeft = !clockDirectionLeft;
         }
 
         dist = newDist;
+        rope.sagAmplitude = 1f - dist.magnitude / maxDist;
 
         if (dist.magnitude > maxDist)
         {

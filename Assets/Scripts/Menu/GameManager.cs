@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public GameObject pauseMenu;
+    public GameObject RopeDrawerPrefab;
 
     void Awake()
     {
