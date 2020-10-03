@@ -21,8 +21,14 @@ public class DogControl : MonoBehaviour
     }
 
 
+    Transform mainCam;
+    private void Start()
+    {
+        mainCam = Camera.main.transform;
+    }
 
-    public Vector3 velocity;
+
+    public Vector3 currentVelocity = Vector3.zero;
 
     public float anglesMultiplier;
 
@@ -32,16 +38,19 @@ public class DogControl : MonoBehaviour
     {
         hAxis = Input.GetAxis("Horizontal");
         vAxis = Input.GetAxis("Vertical");
+        currentVelocity = Vector3.Lerp(currentVelocity, Quaternion.LookRotation(Vector3.Cross(Vector3.up,Vector3.Cross(mainCam.forward, Vector3.up)), Vector3.up) * (new Vector3(hAxis, 0f, vAxis)) * maxVelocity, 0.3f);
     }
 
     private void FixedUpdate()
     {
-        rb.rotation *= Quaternion.AngleAxis(hAxis * anglesMultiplier* Time.fixedDeltaTime, transform.up);
-        rb.velocity = transform.forward * vAxis * maxVelocity;
+        //rb.rotation *= Quaternion.AngleAxis(hAxis * anglesMultiplier* Time.fixedDeltaTime, transform.up);
+        //rb.velocity = transform.forward * vAxis * maxVelocity;
+        rb.velocity = currentVelocity;
+        rb.rotation = Quaternion.Lerp(rb.rotation, Quaternion.LookRotation(currentVelocity, Vector3.up),0.4f);
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(transform.position, transform.position + velocity);
+        Gizmos.DrawLine(transform.position, transform.position + currentVelocity);
     }
 }
