@@ -12,7 +12,7 @@ public class Node : MonoBehaviour
 
     public float initMaxDist, maxDist, anglesToRopeLength = 0.01f;
 
-    public bool clockDirectionLeft = true, isRoot = false;
+    public bool clockDirectionLeft = true, isRoot = false, isDog =false;
 
     public virtual void Start()
     {
@@ -74,6 +74,7 @@ public class Node : MonoBehaviour
                 maxDist = initMaxDist;
             entranceAngle = Vector3.SignedAngle(Vector3.forward, dist, transform.up);
         }
+        //maxDist = child.isDog ? initMaxDist : dist.magnitude;
         rope.sagAmplitude = 0f;
         rope.endPointTransform = child.transform;
         rope.gameObject.SetActive(true);
@@ -83,6 +84,15 @@ public class Node : MonoBehaviour
     Vector3 dist;
 
     public bool createdNode = false;
+
+    public void RecalculateMaxDistRecursively()
+    {
+        if(_child != null)
+        {
+
+            _child.RecalculateMaxDistRecursively();
+        }
+    }
 
     public virtual void FixedUpdate()
     {
@@ -99,7 +109,12 @@ public class Node : MonoBehaviour
         if(Physics.Raycast(r,out hit, newDist.magnitude))
         {
             Node n = hit.transform.GetComponent<Node>();
-            if (n != _child)
+            if (n.tag == "Enemy")
+            {
+                Destroy(n.gameObject);
+                ParticlesManager.Explode(n.transform.position);
+            }
+            else if (n != _child && !n.isDog)
             {
                 if (n._child != null)
                 {
