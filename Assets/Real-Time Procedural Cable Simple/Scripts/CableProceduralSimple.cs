@@ -11,13 +11,13 @@ public class CableProceduralSimple : MonoBehaviour
 
 	// The Start of the cable will be the transform of the Gameobject that has this component.
 	// The Transform of the Gameobject where the End of the cable is. This needs to be assigned in the inspector.
-	[SerializeField] Transform endPointTransform;
+	public Transform endPointTransform;
 
 	// Number of points per meter
 	[SerializeField, Tooltip("Number of points per unit length, using the straight line from the start to the end transform.")] float pointDensity = 3;
 
 	// How much the cable will sag by.
-	[SerializeField] float sagAmplitude = 1;
+	public float sagAmplitude = 1;
 
 	// How much wind will move the cable.
 	[SerializeField] float swayMultiplier = 1;

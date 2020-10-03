@@ -6,19 +6,37 @@ public class RootScript : MonoBehaviour
 {
 
     public Rigidbody dog;
+    RootScript child = null;
+    CableProceduralSimple rope;
+
+    public bool initialRoot = false;
+
     public float initMaxDint, maxDist, anglesToRopeLength;
+
+    Vector3 dist;
+
+    bool clockDirectionLeft = true;
+
+    private void Awake()
+    {
+        rope = GetComponent<CableProceduralSimple>();
+    }
 
     void Start()
     {
         maxDist = initMaxDint;
         dist = dog.position - transform.position;
     }
-    Vector3 dist;
 
-    bool clockDirectionLeft = true;
+    private void Update()
+    {
+    }
 
     void FixedUpdate()
     {
+
+
+
         Vector3 newDist = dog.position- transform.position;
 
         float dif = Vector3.SignedAngle(dist, newDist, transform.up) * anglesToRopeLength;
@@ -44,6 +62,6 @@ public class RootScript : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(transform.position, dog.position);
+        //Gizmos.DrawLine(transform.position, dog.position);
     }
 }
