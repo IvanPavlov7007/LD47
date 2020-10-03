@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Node : MonoBehaviour
 {
     CableProceduralSimple rope;
@@ -11,7 +12,7 @@ public class Node : MonoBehaviour
 
     public float initMaxDist, maxDist, anglesToRopeLength;
 
-    public bool clockDirectionLeft = true;
+    public bool clockDirectionLeft = true, isRoot = false;
 
     public virtual void Start()
     {
@@ -35,6 +36,14 @@ public class Node : MonoBehaviour
         SetChild(target);
     }
 
+    public virtual void DisconnectFromRope()
+    {
+        _child.SetParent(_parent);
+        _parent.SetChild(_child);
+        childRB = null;
+        _child = null;
+    }
+
     public virtual void SetParent(Node parent)
     {
         _parent = parent;
@@ -44,8 +53,12 @@ public class Node : MonoBehaviour
     {
         _child = child;
         dist = _child.transform.position - transform.position;
-        initMaxDist = dist.magnitude;
+        //maxDist = dist.magnitude;
+        if (_parent != null)
+        { 
+        initMaxDist = _parent.initMaxDist - (transform.position - _parent.transform.position).magnitude;
         maxDist = initMaxDist;
+        }
         rope.endPointTransform = child.transform;
         rope.gameObject.SetActive(true);
         childRB = child.GetComponent<Rigidbody>();
@@ -53,12 +66,16 @@ public class Node : MonoBehaviour
 
     Vector3 dist;
 
+    public bool createdNode = false;
+
     public virtual void FixedUpdate()
     {
         if (childRB == null || childRB.isKinematic)
             return;
 
         Vector3 newDist = childRB.position - transform.position;
+        float dif = Vector3.SignedAngle(dist, newDist, transform.up) * anglesToRopeLength;
+
         RaycastHit hit;
         Ray r = new Ray(transform.position, newDist);
         if(Physics.Raycast(r,out hit, newDist.magnitude))
@@ -66,17 +83,26 @@ public class Node : MonoBehaviour
             Node n = hit.transform.GetComponent<Node>();
             if (n != _child)
             {
+                if(n._child != null)
+
                 n.ConnectWithTarget(_child);
+                n.clockDirectionLeft = dif < 0;
                 return;
             }
         }
 
-        float dif = Vector3.SignedAngle(dist, newDist, transform.up) * anglesToRopeLength;
+        
         dif *= clockDirectionLeft ? 1f : -1f;
         maxDist = Mathf.Max(1f, maxDist + dif);
         if (maxDist > initMaxDist)
         {
             maxDist = initMaxDist;
+            if(!isRoot)
+            {
+                DisconnectFromRope();
+                rope.gameObject.SetActive(false);
+                return;
+            }
             clockDirectionLeft = !clockDirectionLeft;
         }
 
