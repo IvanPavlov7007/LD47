@@ -5,7 +5,7 @@ using UnityEngine;
 public class RootScript : MonoBehaviour
 {
 
-    public Transform dog;
+    public Rigidbody dog;
     public float initMaxDint, maxDist, anglesToRopeLength;
 
     void Start()
@@ -35,9 +35,9 @@ public class RootScript : MonoBehaviour
         if (dist.magnitude > maxDist)
         {
             dog.position = transform.position + dist.normalized * maxDist;
-            Vector3 dogForward = dog.forward;
+            Vector3 dogForward = dog.transform.forward;
             if(Vector3.Dot(dogForward,dist) > 0.1f)
-                dog.forward = Vector3.Lerp(dogForward, Vector3.Cross(dist, Vector3.Cross(dogForward, dist)), 0.1f);
+                dog.rotation *= Quaternion.AngleAxis(Vector3.SignedAngle(dogForward, Vector3.Cross(dist, Vector3.Cross(dogForward,dist)), transform.up),Vector3.up);
         }
         
     }

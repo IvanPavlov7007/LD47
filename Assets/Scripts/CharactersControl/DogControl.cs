@@ -8,10 +8,16 @@ public class DogControl : MonoBehaviour
     public float maxVelocity;
     //public Transform root;
 
+
+    public static DogControl instance;
+
+
     void Awake()
     {
-        //rb = GetComponent<Rigidbody>();
-        //rb.inertiaTensorRotation = Quaternion.identity;
+        instance = this;
+        rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = Vector3.zero;
+        rb.inertiaTensorRotation = Quaternion.identity;
     }
 
 
@@ -30,8 +36,8 @@ public class DogControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Rotate(transform.up, hAxis * anglesMultiplier* Time.fixedDeltaTime);
-        transform.position += transform.forward * vAxis * maxVelocity * Time.fixedDeltaTime;
+        rb.rotation *= Quaternion.AngleAxis(hAxis * anglesMultiplier* Time.fixedDeltaTime, transform.up);
+        rb.velocity = transform.forward * vAxis * maxVelocity;
     }
 
     private void OnDrawGizmos()
