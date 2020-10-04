@@ -28,6 +28,14 @@ public class RopeGod : Node
 
 
     public static RopeGod instance;
+
+    Transform speedSpinCollider;
+
+    [Header("speedSpinCollider")]
+    public float speedSpinMaxScaleDist;
+    float speedSpinCurScaleDist;
+    Vector3 speedSpinMinScale, speedSpinMaxScale;
+
     private void Awake()
     {
         instance = this;
@@ -41,6 +49,10 @@ public class RopeGod : Node
     {
         mainCam = Camera.main.transform;
         rope = RopeSystem.instnace;
+        speedSpinCollider = GameObject.Find("speedSpinCollider").transform;
+        speedSpinMinScale = speedSpinCollider.localScale;
+        speedSpinMaxScale = speedSpinMinScale * speedSpinMaxScaleDist;
+        StartCoroutine(WalkSound());
     }
 
     public override void SetParent(Node parent)
@@ -66,6 +78,23 @@ public class RopeGod : Node
 
     public bool Twisting;
 
+    public AudioClip walkS;
+
+    IEnumerator WalkSound()
+    {
+        float t = 0, maxT = 0.7f;
+        while(true)
+        {
+            if(t >= maxT)
+            {
+                SoundManager.instance.PlaySound(walkS);
+                t = 0f;
+            }
+            t += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
     private void FixedUpdate()
     {
         Vector3 ropeLengthVector = transform.position - parent.position;
@@ -75,7 +104,6 @@ public class RopeGod : Node
         if (Vector3.Dot(newtangentalVector, tangentalVector) < 0f)
             maxVelocity = initMaxVelocity;
         tangentalVector = newtangentalVector;
-
         Vector3 velocity = inputDirection;
 
         distToEnd = treeNode.AvailableRopeLength - ropeLengthVector.magnitude;
@@ -90,12 +118,14 @@ public class RopeGod : Node
             float t = distToEnd / velocityCorrectingRandMargin;
             velocity = Vector3.Lerp(velocity, tangentalVector, 1 - t).normalized * velocity.magnitude;
             if(Twisting)
-                maxVelocity = Mathf.Lerp(maxVelocity, maxMaxVelocity, velocityGainLerp);
+                maxVelocity = Mathf.MoveTowards(maxVelocity, maxMaxVelocity, Time.fixedDeltaTime * velocityGainLerp);
             else
-                maxVelocity = Mathf.Lerp(maxVelocity, initMaxVelocity, 0.7f);
+                maxVelocity = Mathf.MoveTowards(maxVelocity, initMaxVelocity, Time.fixedDeltaTime * velocityGainLerp * 4f);
         }
         else
-            maxVelocity = Mathf.Lerp(maxVelocity, initMaxVelocity, 0.7f);
+            maxVelocity = Mathf.MoveTowards(maxVelocity, initMaxVelocity, Time.fixedDeltaTime * velocityGainLerp * 4f);
+
+        speedSpinCollider.localScale = Vector3.Lerp(speedSpinMinScale, speedSpinMaxScale, Mathf.InverseLerp(initMaxVelocity, maxMaxVelocity, maxVelocity));
 
         if (treeNode.AvailableRopeLength < 1f && Twisting)
         {
@@ -105,10 +135,10 @@ public class RopeGod : Node
         if (distToEnd < 0)
         {
             Vector3 pos = parent.position + ropeLengthVector.normalized * treeNode.AvailableRopeLength;
-            rb.position = new Vector3(pos.x, rb.position.y, pos.z);
+            rb.position = new Vector3(pos.x, Mathf.Min(0.5f, rb.position.y), pos.z);
         }
         velocity *= maxVelocity;
-        rb.velocity = new Vector3(velocity.x, Mathf.Min(1f,rb.velocity.y),velocity.z);
+        rb.velocity = new Vector3(velocity.x, Mathf.Min(0.5f,rb.velocity.y),velocity.z);
 
         if (velocity.magnitude > 0.01f)
             lastRotationDir = velocity.normalized;

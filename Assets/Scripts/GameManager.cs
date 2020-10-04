@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject RopeDrawerPrefab;
     public GameObject nodePrefab;
-    public GameObject EnemyPrefab;
+    
 
     public TextMeshProUGUI scoreCounter,livesCounter;
 
@@ -21,7 +21,10 @@ public class GameManager : MonoBehaviour
     public List<Enemy> enemies;
     public int maxEnemiesCount;
 
+    [Header("Enemies")]
+    public GameObject EnemyPrefab;
     GameObject enemiesFolder;
+    public float areaHalfSide, areaBroadness;
 
     void Awake()
     {
@@ -45,12 +48,25 @@ public class GameManager : MonoBehaviour
 
         if(enemies.Count< maxEnemiesCount)
         {
-            Instantiate(EnemyPrefab, new Vector3(Random.Range(-10f, 10f), 2f, Random.Range(-10, 10)), Quaternion.identity, enemiesFolder.transform);
+            CreateNewEnemy();
         }
     }
 
     public void CreateNewEnemy()
     {
+        float x = Random.Range(-1f,1f) * areaBroadness;
+        if (x > 0)
+            x += areaHalfSide;
+        else
+            x -= areaHalfSide;
+
+        float y = Random.Range(-1f, 1f) * areaBroadness;
+        if (y > 0)
+            y += areaHalfSide;
+        else
+            y -= areaHalfSide;
+
+        Instantiate(EnemyPrefab, new Vector3(x, 2f, y), Quaternion.identity, enemiesFolder.transform);
 
     }
 

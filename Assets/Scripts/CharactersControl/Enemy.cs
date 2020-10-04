@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
 
     public void Hit()
     {
+        SoundManager.PlayHit();
         anim.SetTrigger(hitTrig);
         if(--health == 0)
         {
