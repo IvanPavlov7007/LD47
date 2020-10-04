@@ -45,10 +45,20 @@ public class StaticNode : Node
     {
         if(rope == null)
             rope = Instantiate(GameManager.instance.RopeDrawerPrefab, transform).GetComponent<CableProceduralSimple>();
-        if (child != null)
-            rope.endPointTransform = child.transform;
+        UpdateRopeEndTransform();
         rope.sagAmplitude = 0f;
         rope.gameObject.SetActive(true);
+    }
+
+    public void UpdateRopeEndTransform()
+    {
+        if (child != null)
+        {
+            if (child.connectionPosition != null)
+                rope.endPointTransform = child.connectionPosition;
+            else
+                rope.endPointTransform = child.transform;
+        }
     }
 
     public virtual void Awake()
@@ -124,7 +134,7 @@ public class StaticNode : Node
             perp.Normalize();
             enemy.rb.velocity = Vector3.zero;
             enemy.rb.position += perp * 2f;
-            enemy.rb.AddForce( perp  * 10f * enemy.rb.mass, ForceMode.Impulse);
+            enemy.rb.AddForce( perp  * 3f * RopeGod.instance.maxVelocity * enemy.rb.mass, ForceMode.Impulse);
             enemy.Hit();
         }
     }
@@ -132,8 +142,7 @@ public class StaticNode : Node
     public override void SetChild(Node child)
     {
         base.SetChild(child);
-        if(rope != null)
-            rope.endPointTransform = child.transform;
+        UpdateRopeEndTransform();
     }
 
     void CreateNewStaticNode(Transform t, bool clockDirectionLeft)

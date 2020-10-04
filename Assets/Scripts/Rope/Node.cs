@@ -14,6 +14,8 @@ public class Node : MonoBehaviour
         set { transform.position = value; }
     }
 
+    public Transform connectionPosition;
+
     public virtual void SetParent(Node parent)
     {
         this.parent = parent;

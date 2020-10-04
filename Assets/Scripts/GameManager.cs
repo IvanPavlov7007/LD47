@@ -63,8 +63,8 @@ public class GameManager : MonoBehaviour
 
     public static void LoseLife()
     {
-        if (--instance.currentLives == 0)
-            instance.Pause();
+        //if (--instance.currentLives == 0)
+        //    instance.Pause();
 
     }
 
