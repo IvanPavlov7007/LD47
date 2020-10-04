@@ -54,8 +54,6 @@ public class RopeGod : Node
         hAxis = Input.GetAxis("Horizontal");
         vAxis = Input.GetAxis("Vertical");
         inputDirection = Vector3.Lerp(inputDirection, Quaternion.LookRotation(Vector3.Cross(Vector3.up, Vector3.Cross(mainCam.forward, Vector3.up)), Vector3.up) * (new Vector3(hAxis, 0f, vAxis)), velocityChangeLerpValue);
-        if (inputDirection.magnitude > 0.01f)
-            lastRotationDir = inputDirection.normalized;
         if (inputDirection.magnitude < 0.01f)
             locked = false;
     }
@@ -65,6 +63,8 @@ public class RopeGod : Node
 
     Vector3 tangentalVector;
     bool locked = false;
+
+    public bool Twisting;
 
     private void FixedUpdate()
     {
@@ -89,7 +89,10 @@ public class RopeGod : Node
         {
             float t = distToEnd / velocityCorrectingRandMargin;
             velocity = Vector3.Lerp(velocity, tangentalVector, 1 - t).normalized * velocity.magnitude;
-            maxVelocity = Mathf.Lerp(maxVelocity, maxMaxVelocity, velocityGainLerp);
+            if(Twisting)
+                maxVelocity = Mathf.Lerp(maxVelocity, maxMaxVelocity, velocityGainLerp);
+            else
+                maxVelocity = Mathf.Lerp(maxVelocity, initMaxVelocity, 0.7f);
         }
         else
             maxVelocity = Mathf.Lerp(maxVelocity, initMaxVelocity, 0.7f);
@@ -105,6 +108,9 @@ public class RopeGod : Node
         if (distToEnd < 0)
             rb.position = parent.position + ropeLengthVector.normalized * treeNode.AvailableRopeLength;
         rb.velocity = velocity * maxVelocity;
-        rb.rotation = Quaternion.Lerp(rb.rotation, Quaternion.LookRotation(velocity, Vector3.up), rotationLerpValue);
+
+        if (velocity.magnitude > 0.01f)
+            lastRotationDir = velocity.normalized;
+        rb.rotation = Quaternion.Lerp(rb.rotation, Quaternion.LookRotation(lastRotationDir, Vector3.up), rotationLerpValue);
     }
 }

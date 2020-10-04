@@ -86,6 +86,11 @@ public class StaticNode : Node
         dif = Vector3.SignedAngle(ropeLengthVector, newRopeLengthVector, transform.up) * deltaLengthCoefficientAngles;
         dif *= clockDirectionLeft ? 1f : -1f;
 
+        if(rg != null)
+        {
+            rg.Twisting = dif < 0;
+        }
+
         currentAvailableRopeLength = currentAvailableRopeLength + dif;
 
         //Check Rotation direction and Disconnect from rope
@@ -139,10 +144,13 @@ public class StaticNode : Node
         }
     }
 
+    protected RopeGod rg;
+
     public override void SetChild(Node child)
     {
         base.SetChild(child);
         UpdateRopeEndTransform();
+        rg = child as RopeGod;
     }
 
     void CreateNewStaticNode(Transform t, bool clockDirectionLeft)

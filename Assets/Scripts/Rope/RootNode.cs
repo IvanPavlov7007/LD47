@@ -9,6 +9,7 @@ public class RootNode : StaticNode
     public override void Start()
     {
         base.Start();
+        rg = child as RopeGod;
         AllotRopeLength(RopeLength);
     }
 }
