@@ -105,7 +105,6 @@ GameObject:
   - component: {fileID: 407547103794896149}
   - component: {fileID: 407547103794896148}
   - component: {fileID: 407547103794896171}
-  - component: {fileID: 1819353439}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -253,28 +252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocityMagnitude: 1
---- !u!114 &1819353439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407547103794896170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13cb5a9bbe2074c41a4c6d3d7d6facd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 0}
-  _child: {fileID: 0}
-  childRB: {fileID: 0}
-  initMaxDist: 0
-  maxDist: 0
-  anglesToRopeLength: 0.01
-  clockDirectionLeft: 1
-  isRoot: 0
-  isDog: 0
-  createdNode: 0
 --- !u!1001 &6992439349306970664
 PrefabInstance:
   m_ObjectHideFlags: 0

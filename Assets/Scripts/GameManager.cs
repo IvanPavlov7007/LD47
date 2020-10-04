@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject pauseMenu;
     public GameObject RopeDrawerPrefab;
+    public GameObject nodePrefab;
 
     void Awake()
     {
