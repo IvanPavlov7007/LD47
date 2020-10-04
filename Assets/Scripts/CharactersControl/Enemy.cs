@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,10 +10,18 @@ public class Enemy : MonoBehaviour
 
     RopeGod dog;
 
+    NavMeshAgent agent;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
         dog = RopeGod.instance;
+    }
+
+    private void Update()
+    {
+        agent.SetDestination(RopeGod.instance.position);
     }
 
     void FixedUpdate()
@@ -20,7 +29,7 @@ public class Enemy : MonoBehaviour
         Vector3 dist = dog.rb.position - rb.position;
         Vector3 velosityProj = dist.normalized * Vector3.Dot(dist, rb.velocity) * rb.velocity.magnitude / dist.magnitude;
 
-        if (velosityProj.magnitude < maxVelocity)
-            rb.AddForce((dist).normalized * acceleration * rb.mass);
+        //if (velosityProj.magnitude < maxVelocity)
+            //rb.AddForce((dist).normalized * acceleration * rb.mass);
     }
 }

@@ -118,7 +118,7 @@ public class StaticNode : Node
         if (enemy != null)
         {
             enemy.rb.velocity = Vector3.zero;
-            enemy.rb.AddForce(-hit.normal * 60f * enemy.rb.mass, ForceMode.Impulse);
+            enemy.rb.AddForce(-hit.normal * 10f * enemy.rb.mass, ForceMode.Impulse);
         }
     }
 
