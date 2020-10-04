@@ -97,17 +97,18 @@ public class RopeGod : Node
         else
             maxVelocity = Mathf.Lerp(maxVelocity, initMaxVelocity, 0.7f);
 
-        if (treeNode.AvailableRopeLength < 1f)
+        if (treeNode.AvailableRopeLength < 1f && Twisting)
         {
-            maxVelocity = initMaxVelocity;
-            Vector3 cross = Vector3.Cross(tangentalVector, ropeLengthVector);
-            if (cross.y > 0f && treeNode.clockDirectionLeft || cross.y < 0f && !treeNode.clockDirectionLeft)
                 velocity = Vector3.zero;
         }
 
         if (distToEnd < 0)
-            rb.position = parent.position + ropeLengthVector.normalized * treeNode.AvailableRopeLength;
-        rb.velocity = velocity * maxVelocity;
+        {
+            Vector3 pos = parent.position + ropeLengthVector.normalized * treeNode.AvailableRopeLength;
+            rb.position = new Vector3(pos.x, rb.position.y, pos.z);
+        }
+        velocity *= maxVelocity;
+        rb.velocity = new Vector3(velocity.x, Mathf.Min(1f,rb.velocity.y),velocity.z);
 
         if (velocity.magnitude > 0.01f)
             lastRotationDir = velocity.normalized;
