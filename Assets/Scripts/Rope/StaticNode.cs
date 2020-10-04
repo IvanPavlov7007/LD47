@@ -95,7 +95,8 @@ public class StaticNode : Node
         if (Physics.Raycast(r, out hit, newRopeLengthVector.magnitude))
         {
             Transform t = hit.transform;
-            if (t.tag == "Node" && t.GetComponent<Node>() == null)
+            Node n = t.GetComponent<Node>();
+            if (t.tag == "Node" && n != child && n != this)
                 CreateNewStaticNode(t, dif < 0); 
             else if (t.GetComponent<RopeGod>() == null)
                 PushObject(hit);
@@ -112,7 +113,13 @@ public class StaticNode : Node
 
     void PushObject(RaycastHit hit)
     {
-        
+        var enemy = hit.transform.GetComponent<Enemy>();
+        Debug.DrawLine(hit.point, hit.point + hit.normal * 10f);
+        if (enemy != null)
+        {
+            enemy.rb.velocity = Vector3.zero;
+            enemy.rb.AddForce(-hit.normal * 60f * enemy.rb.mass, ForceMode.Impulse);
+        }
     }
 
     public override void SetChild(Node child)

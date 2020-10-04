@@ -5,6 +5,7 @@ using UnityEngine;
 public class RopeGod : Node
 {
     public float InputDirectionMultiplier, velocityCorrectingRandMargin,  velocityChangeLerpValue = 0.3f, rotationLerpValue = 0.3f;
+    public Transform rotationSpineBone;
     public Rigidbody rb;
 
     Transform mainCam;
@@ -23,8 +24,11 @@ public class RopeGod : Node
     //    private set { }
     //}
 
+
+    public static RopeGod instance;
     private void Awake()
     {
+        instance = this;
         rb = GetComponent<Rigidbody>();
         SetParent(parent);
         lastRotationDir = transform.forward;
