@@ -81,8 +81,8 @@ public class RopeGod : Node
                 velocity = Vector3.zero;
         }
 
-        //if (distToEnd < 0)
-        //    rb.position = parent.position + ropeLengthVector.normalized * treeNode.AvailableRopeLength;
+        if (distToEnd < 0)
+            rb.position = parent.position + ropeLengthVector.normalized * treeNode.AvailableRopeLength;
         rb.velocity = velocity;
         rb.rotation = Quaternion.Lerp(rb.rotation, Quaternion.LookRotation(lastRotationDir, Vector3.up), rotationLerpValue);
     }

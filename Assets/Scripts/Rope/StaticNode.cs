@@ -98,8 +98,8 @@ public class StaticNode : Node
             Node n = t.GetComponent<Node>();
             if (t.tag == "Node" && n != child && n != this)
                 CreateNewStaticNode(t, dif < 0); 
-            else if (t.GetComponent<RopeGod>() == null)
-                PushObject(hit);
+            else if (t.GetComponent<Enemy>() != null)
+                PushObject(hit, newRopeLengthVector);
 
         }
 
@@ -111,14 +111,21 @@ public class StaticNode : Node
         ropeLengthVector = newRopeLengthVector;
     }
 
-    void PushObject(RaycastHit hit)
+    void PushObject(RaycastHit hit, Vector3 rayDir)
     {
         var enemy = hit.transform.GetComponent<Enemy>();
         Debug.DrawLine(hit.point, hit.point + hit.normal * 10f);
         if (enemy != null)
         {
             enemy.rb.velocity = Vector3.zero;
-            enemy.rb.AddForce(-hit.normal * 10f * enemy.rb.mass, ForceMode.Impulse);
+            Vector3 centerDir = enemy.rb.position - hit.point;
+            Vector3 perp = Vector3.Cross(rayDir,Vector3.up);
+            perp = Vector3.Dot(perp, centerDir) < 0 ? perp * -1f : perp;
+            perp.Normalize();
+            enemy.rb.velocity = Vector3.zero;
+            enemy.rb.position += perp * 2f;
+            enemy.rb.AddForce( perp  * 10f * enemy.rb.mass, ForceMode.Impulse);
+            enemy.Hit();
         }
     }
 

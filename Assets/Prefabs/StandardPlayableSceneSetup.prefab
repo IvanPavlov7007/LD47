@@ -485,7 +485,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &2046272389
 MonoBehaviour:
@@ -539,9 +539,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 2132000421}
-  dialog: {fileID: 11400000, guid: 2766f9ff7267707428b1a9c6fd0ba2b4, type: 2}
+  currentDialog: {fileID: 0}
   startOnAwake: 0
-  lettersAppearSpeedProSec: 30
 --- !u!1 &2132000419
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,6 +775,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 8037058149030141450}
+  RopeDrawerPrefab: {fileID: 0}
+  nodePrefab: {fileID: 0}
+  currentScore: 0
+  scoreMultiplier: 0
 --- !u!1 &7616949579526157192
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,7 +965,7 @@ PrefabInstance:
     - target: {fileID: 6816213884924149097, guid: a13d473128bee1b4b92cd65f2a14f44b,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6816213884924149101, guid: a13d473128bee1b4b92cd65f2a14f44b,
         type: 3}
@@ -1088,7 +1091,7 @@ PrefabInstance:
     - target: {fileID: 5023838337784398230, guid: 05cbbc5c5ef18ca4fbb47dd656499ffd,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5023838337784398231, guid: 05cbbc5c5ef18ca4fbb47dd656499ffd,
         type: 3}
