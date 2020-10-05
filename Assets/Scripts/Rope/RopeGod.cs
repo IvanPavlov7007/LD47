@@ -104,7 +104,7 @@ public class RopeGod : Node
             curIdleTime += Time.deltaTime;
         }
 
-        ableToMove = !anim.GetCurrentAnimatorStateInfo(0).IsName("GettingUp");
+        ableToMove = !anim.GetCurrentAnimatorStateInfo(0).IsName("Sit") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Lay");
 
         anim.SetBool(idleAnim, idle);
         anim.SetFloat(idleTimeAnim, curIdleTime / maxIdleTime);
@@ -117,7 +117,7 @@ public class RopeGod : Node
         //Neck.rotation *= Quaternion.Euler(0,0,Vector3.Angle);
 
         SpineTop.transform.rotation *= Quaternion.Euler(Mathf.Lerp(0f, -25f, howNearEnd * inputDirection.magnitude),
-            Mathf.Clamp(Vector3.SignedAngle(inputDirection, ropeLengthVector, Vector3.up) * inputDirection.magnitude * howNearEnd , - 45f,45f), 0f);//* (Vector3.Dot(inputDirection,lastRotationDir) > 0? 1f: -1f)
+            Mathf.Clamp(Vector3.SignedAngle(inputDirection, ropeLengthVector, Vector3.up) * inputDirection.magnitude * howNearEnd, -45f, 45f),0f); //, Mathf.Clamp( , 0.3f, -30f, 30f)));//* (Vector3.Dot(inputDirection,lastRotationDir) > 0? 1f: -1f)
                                                                                                                                                     //* Quaternion.Lerp(Quaternion.identity, Quaternion.LookRotation(ropeLengthVector,Vector3.up), howNearEnd);
     }
 

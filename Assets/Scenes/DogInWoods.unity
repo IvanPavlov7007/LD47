@@ -7720,7 +7720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 1567292013}
   child: {fileID: 0}
-  connectionPosition: {fileID: 0}
+  connectionPosition: {fileID: 1396906236}
   initMaxVelocity: 13
   maxMaxVelocity: 50
   velocityCorrectingRandMargin: 2
@@ -7733,7 +7733,7 @@ MonoBehaviour:
   lockOnTarget: 0
   rb: {fileID: 0}
   maxVelocity: 0
-  maxIdleTime: 10
+  maxIdleTime: 3
   speedSpinMaxScaleDist: 5
   distToEnd: 0
   Twisting: 0
