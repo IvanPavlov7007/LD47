@@ -687,6 +687,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8889885118297243251, guid: 5da1daf5d60264841a4781b202d2bede,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8889885118297243252, guid: 5da1daf5d60264841a4781b202d2bede,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6136,7 +6141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &340503640
 Transform:
   m_ObjectHideFlags: 0
@@ -6153,6 +6158,7 @@ Transform:
   - {fileID: 1491261005}
   - {fileID: 757969134}
   - {fileID: 30523065}
+  - {fileID: 769255120}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7005,7 +7011,7 @@ Transform:
   m_Children:
   - {fileID: 2110749545}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1059098414
 Animator:
@@ -7031,37 +7037,37 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 340503640}
     m_Modifications:
     - target: {fileID: 407547103794896150, guid: 2aa35e4c55dbdea46b94e47d76893c97,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.3711472
+      value: -3.2276444
       objectReference: {fileID: 0}
     - target: {fileID: 407547103794896150, guid: 2aa35e4c55dbdea46b94e47d76893c97,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.088701636
+      value: -1.107189
       objectReference: {fileID: 0}
     - target: {fileID: 407547103794896150, guid: 2aa35e4c55dbdea46b94e47d76893c97,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.740181
+      value: 7.1000643
       objectReference: {fileID: 0}
     - target: {fileID: 407547103794896150, guid: 2aa35e4c55dbdea46b94e47d76893c97,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 407547103794896150, guid: 2aa35e4c55dbdea46b94e47d76893c97,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 407547103794896150, guid: 2aa35e4c55dbdea46b94e47d76893c97,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 407547103794896150, guid: 2aa35e4c55dbdea46b94e47d76893c97,
         type: 3}
@@ -7071,7 +7077,7 @@ PrefabInstance:
     - target: {fileID: 407547103794896150, guid: 2aa35e4c55dbdea46b94e47d76893c97,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 407547103794896150, guid: 2aa35e4c55dbdea46b94e47d76893c97,
         type: 3}
@@ -7160,7 +7166,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1443882869
 GameObject:
@@ -7178,7 +7184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!320 &1443882870
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -7216,7 +7222,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1450198861
 PrefabInstance:
@@ -9487,7 +9493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2000752128
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9615,7 +9621,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2021983448}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
@@ -9856,6 +9862,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889885118297243251, guid: 5da1daf5d60264841a4781b202d2bede,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8889885118297243252, guid: 5da1daf5d60264841a4781b202d2bede,
         type: 3}

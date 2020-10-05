@@ -5,7 +5,7 @@ using UnityEngine;
 public class RopeGod : Node
 {
     public float initMaxVelocity, maxMaxVelocity, velocityCorrectingRandMargin, velocityGainLerp,  velocityChangeLerpValue = 0.3f, rotationLerpValue = 0.3f;
-    public Transform rotationSpineBone;
+    public Transform rotationSpineBone, SpineTop;
     public Rigidbody rb;
 
     public float maxVelocity;
@@ -70,6 +70,11 @@ public class RopeGod : Node
             locked = false;
     }
 
+    private void LateUpdate()
+    {
+        SpineTop.transform.rotation *= Quaternion.Euler(Mathf.Lerp(0f, -45f, howNearEnd), 0f, 0f);
+    }
+
     [SerializeField]
     float distToEnd;
 
@@ -95,6 +100,8 @@ public class RopeGod : Node
         }
     }
 
+    float howNearEnd = 0f;
+
     private void FixedUpdate()
     {
         Vector3 ropeLengthVector = transform.position - parent.position;
@@ -113,10 +120,10 @@ public class RopeGod : Node
         //    velocity = tangentalVector;
         //}
         //else 
+        howNearEnd = 1f - distToEnd / velocityCorrectingRandMargin;
         if (distToEnd < velocityCorrectingRandMargin && !(Vector3.Dot(-ropeLengthVector, velocity) > 0))
         {
-            float t = distToEnd / velocityCorrectingRandMargin;
-            velocity = Vector3.Lerp(velocity, tangentalVector, 1 - t).normalized * velocity.magnitude;
+            velocity = Vector3.Lerp(velocity * velocity.magnitude, tangentalVector, howNearEnd).normalized ;
             if(Twisting)
                 maxVelocity = Mathf.MoveTowards(maxVelocity, maxMaxVelocity, Time.fixedDeltaTime * velocityGainLerp);
             else
@@ -125,7 +132,7 @@ public class RopeGod : Node
         else
             maxVelocity = Mathf.MoveTowards(maxVelocity, initMaxVelocity, Time.fixedDeltaTime * velocityGainLerp * 4f);
 
-        speedSpinCollider.localScale = Vector3.Lerp(speedSpinMinScale, speedSpinMaxScale, Mathf.InverseLerp(initMaxVelocity, maxMaxVelocity, maxVelocity));
+        //speedSpinCollider.localScale = Vector3.Lerp(speedSpinMinScale, speedSpinMaxScale, Mathf.InverseLerp(initMaxVelocity, maxMaxVelocity, maxVelocity));
 
         if (treeNode.AvailableRopeLength < 1f && Twisting)
         {
