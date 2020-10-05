@@ -24,6 +24,9 @@ ModelImporter:
   - first:
       74: 2157088157646505611
     second: hudarmat|ley-stay
+  - first:
+      74: -7196179992803438936
+    second: hudarmat|LAAY
   externalObjects: {}
   materials:
     materialImportMode: 0
@@ -239,7 +242,7 @@ ModelImporter:
       takeName: hudarmat|SITT-THIS
       internalID: 0
       firstFrame: 1
-      lastFrame: 74
+      lastFrame: 268
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -268,7 +271,7 @@ ModelImporter:
       takeName: hudarmat|stand
       internalID: 0
       firstFrame: 1
-      lastFrame: 37
+      lastFrame: 119
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -297,7 +300,7 @@ ModelImporter:
       takeName: hudarmat|SITT-THIS
       internalID: 0
       firstFrame: 48
-      lastFrame: 176
+      lastFrame: 240
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -334,6 +337,35 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hudarmat|LAAY
+      takeName: hudarmat|ley-THIS
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 267
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
