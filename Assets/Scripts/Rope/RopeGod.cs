@@ -5,7 +5,7 @@ using UnityEngine;
 public class RopeGod : Node
 {
     public float initMaxVelocity, maxMaxVelocity, velocityCorrectingRandMargin, velocityGainLerp,  velocityChangeLerpValue = 0.3f, rotationLerpValue = 0.3f;
-    public Transform rotationSpineBone, SpineTop;
+    public Transform SpineTop, lookTarget;
     public Rigidbody rb;
 
     public float maxVelocity;
@@ -28,6 +28,9 @@ public class RopeGod : Node
 
 
     public static RopeGod instance;
+    Animator anim;
+    int speedAnim = Animator.StringToHash("Speed");
+
 
     Transform speedSpinCollider;
 
@@ -39,6 +42,7 @@ public class RopeGod : Node
     private void Awake()
     {
         instance = this;
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         SetParent(parent);
         lastRotationDir = transform.forward;
@@ -49,9 +53,9 @@ public class RopeGod : Node
     {
         mainCam = Camera.main.transform;
         rope = RopeSystem.instnace;
-        speedSpinCollider = GameObject.Find("speedSpinCollider").transform;
-        speedSpinMinScale = speedSpinCollider.localScale;
-        speedSpinMaxScale = speedSpinMinScale * speedSpinMaxScaleDist;
+        //speedSpinCollider = GameObject.Find("speedSpinCollider").transform;
+        //speedSpinMinScale = speedSpinCollider.localScale;
+        //speedSpinMaxScale = speedSpinMinScale * speedSpinMaxScaleDist;
         StartCoroutine(WalkSound());
     }
 
@@ -68,11 +72,13 @@ public class RopeGod : Node
         inputDirection = Vector3.Lerp(inputDirection, Quaternion.LookRotation(Vector3.Cross(Vector3.up, Vector3.Cross(mainCam.forward, Vector3.up)), Vector3.up) * (new Vector3(hAxis, 0f, vAxis)), velocityChangeLerpValue);
         if (inputDirection.magnitude < 0.01f)
             locked = false;
+        anim.SetFloat(speedAnim, inputDirection.magnitude);
     }
 
     private void LateUpdate()
     {
-        SpineTop.transform.rotation *= Quaternion.Euler(Mathf.Lerp(0f, -45f, howNearEnd), 0f, 0f);
+        SpineTop.transform.rotation *= Quaternion.Euler(Mathf.Lerp(0f, -10f, howNearEnd * inputDirection.magnitude), Mathf.Clamp(Vector3.SignedAngle(inputDirection, ropeLengthVector, Vector3.up) * inputDirection.magnitude * howNearEnd, - 45f,45f), 0f);
+            //* Quaternion.Lerp(Quaternion.identity, Quaternion.LookRotation(ropeLengthVector,Vector3.up), howNearEnd);
     }
 
     [SerializeField]
@@ -102,9 +108,10 @@ public class RopeGod : Node
 
     float howNearEnd = 0f;
 
+    Vector3 ropeLengthVector;
     private void FixedUpdate()
     {
-        Vector3 ropeLengthVector = transform.position - parent.position;
+        ropeLengthVector = transform.position - parent.position;
         Vector3 newtangentalVector = Vector3.Cross(ropeLengthVector, Vector3.up).normalized;
         if (Vector3.Dot(newtangentalVector, locked? tangentalVector :  rb.velocity) < 0)
             newtangentalVector *= -1f;
@@ -120,17 +127,17 @@ public class RopeGod : Node
         //    velocity = tangentalVector;
         //}
         //else 
-        howNearEnd = 1f - distToEnd / velocityCorrectingRandMargin;
-        if (distToEnd < velocityCorrectingRandMargin && !(Vector3.Dot(-ropeLengthVector, velocity) > 0))
-        {
-            velocity = Vector3.Lerp(velocity * velocity.magnitude, tangentalVector, howNearEnd).normalized ;
-            if(Twisting)
-                maxVelocity = Mathf.MoveTowards(maxVelocity, maxMaxVelocity, Time.fixedDeltaTime * velocityGainLerp);
-            else
-                maxVelocity = Mathf.MoveTowards(maxVelocity, initMaxVelocity, Time.fixedDeltaTime * velocityGainLerp * 4f);
-        }
-        else
-            maxVelocity = Mathf.MoveTowards(maxVelocity, initMaxVelocity, Time.fixedDeltaTime * velocityGainLerp * 4f);
+        howNearEnd = Mathf.Max(0f, 1f - distToEnd / velocityCorrectingRandMargin);
+        //if (distToEnd < velocityCorrectingRandMargin && !(Vector3.Dot(-ropeLengthVector, velocity) > 0))
+        //{
+        //    velocity = Vector3.Lerp(velocity * velocity.magnitude, tangentalVector, howNearEnd).normalized ;
+        //    if(Twisting)
+        //        maxVelocity = Mathf.MoveTowards(maxVelocity, maxMaxVelocity, Time.fixedDeltaTime * velocityGainLerp);
+        //    else
+        //        maxVelocity = Mathf.MoveTowards(maxVelocity, initMaxVelocity, Time.fixedDeltaTime * velocityGainLerp * 4f);
+        //}
+        //else
+        //    maxVelocity = Mathf.MoveTowards(maxVelocity, initMaxVelocity, Time.fixedDeltaTime * velocityGainLerp * 4f);
 
         //speedSpinCollider.localScale = Vector3.Lerp(speedSpinMinScale, speedSpinMaxScale, Mathf.InverseLerp(initMaxVelocity, maxMaxVelocity, maxVelocity));
 
