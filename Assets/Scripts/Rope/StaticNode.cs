@@ -74,7 +74,6 @@ public class StaticNode : Node
         deltaLengthCoefficientAngles = 2 * Mathf.PI * radius * fullDeg;
     }
 
-
     void Update()
     {
         if (rope != null && child != null)
@@ -106,7 +105,7 @@ public class StaticNode : Node
             //Debug.Log(clockDirDif);
         }
 
-        currentAvailableRopeLength = currentAvailableRopeLength + dif;
+        //currentAvailableRopeLength = currentAvailableRopeLength + dif;
 
         //Check Rotation direction and Disconnect from rope
         if(currentAvailableRopeLength > maxAvailableRopeLength + 0.1f)
