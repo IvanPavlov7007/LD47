@@ -52,7 +52,7 @@ public class StaticNode : Node
 
     public void UpdateRopeEndTransform()
     {
-        if (child != null)
+        if (child != null && rope!= null)
         {
             if (child.connectionPosition != null)
                 rope.endPointTransform = child.connectionPosition;
@@ -66,9 +66,13 @@ public class StaticNode : Node
         deltaLengthCoefficientAngles = 2 * Mathf.PI * radius * fullDeg;
     }
 
-    private void Update()
+
+    void Update()
     {
-        
+        if (rope != null && child != null)
+        {
+            rope.sagAmplitude = 1f - ropeLengthVector.magnitude / currentAvailableRopeLength;
+        }
     }
 
 
@@ -79,22 +83,25 @@ public class StaticNode : Node
         Destroy(rope.gameObject);
         Destroy(this);
     }
-    float dif;
+    
+
+    float dif,clockDirDif;
     private void FixedUpdate()
     {
         Vector3 newRopeLengthVector = child.position - transform.position;
-        dif = Vector3.SignedAngle(ropeLengthVector, newRopeLengthVector, transform.up) * deltaLengthCoefficientAngles;
-        dif *= clockDirectionLeft ? 1f : -1f;
+        clockDirDif = Vector3.SignedAngle(ropeLengthVector, newRopeLengthVector, transform.up) * deltaLengthCoefficientAngles;
+        dif = clockDirDif * (clockDirectionLeft ? 1f : -1f);
 
         if(rg != null)
         {
             rg.Twisting = dif < 0;
+            //Debug.Log(clockDirDif);
         }
 
         currentAvailableRopeLength = currentAvailableRopeLength + dif;
 
         //Check Rotation direction and Disconnect from rope
-        if(currentAvailableRopeLength > maxAvailableRopeLength)
+        if(currentAvailableRopeLength > maxAvailableRopeLength + 0.1f)
         {
             if (parent != null)
             {
@@ -112,7 +119,7 @@ public class StaticNode : Node
             Transform t = hit.transform;
             Node n = t.GetComponent<Node>();
             if (t.tag == "Node" && n != child && n != this)
-                CreateNewStaticNode(t, dif < 0); 
+                CreateNewStaticNode(t, clockDirDif < 0); 
             else if (t.GetComponent<Enemy>() != null)
                 PushObject(hit, newRopeLengthVector);
 
@@ -151,16 +158,19 @@ public class StaticNode : Node
         base.SetChild(child);
         UpdateRopeEndTransform();
         rg = child as RopeGod;
+        if (rg != null)
+            enabled = true;
     }
 
     void CreateNewStaticNode(Transform t, bool clockDirectionLeft)
     {
+        enabled = false;
         StaticNode n = t.gameObject.AddComponent<StaticNode>();
         n.clockDirectionLeft = clockDirectionLeft;
         child.SetParent(n);
         n.SetParent(this);
         n.SetChild(child);
-        n.AllotRopeLength(maxAvailableRopeLength - (position - n.position).magnitude);
+        n.AllotRopeLength(AvailableRopeLength - (position - n.position).magnitude);
         SetChild(n);
     }
 }
