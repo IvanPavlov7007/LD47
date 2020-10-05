@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: 1761986900023282933
-    second: hudarmat|ley-THIS
+    second: hudarmat|leydown
   - first:
       74: -9104028456187644356
     second: hudarmat|shittywalk
@@ -18,6 +18,12 @@ ModelImporter:
   - first:
       74: 8342030212563842090
     second: hudarmat|stand
+  - first:
+      74: -7902990774006759841
+    second: hudarmat|keepsitting
+  - first:
+      74: 2157088157646505611
+    second: hudarmat|ley-stay
   externalObjects: {}
   materials:
     materialImportMode: 0
@@ -27,7 +33,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleCurves: 1
+    resampleCurves: 0
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
@@ -38,7 +44,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 0
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -47,11 +53,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: hudarmat|ley-THIS
+      name: hudarmat|leydown
       takeName: hudarmat|ley-THIS
       internalID: 0
       firstFrame: 1
-      lastFrame: 1
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -71,8 +77,132 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera.001
+        weight: 0
+      - path: Cylinder
+        weight: 0
+      - path: external-content.duckduckgo.com
+        weight: 0
+      - path: hudarmat
+        weight: 1
+      - path: hudarmat/bottompull
+        weight: 1
+      - path: hudarmat/bottompull/bottompull_end
+        weight: 1
+      - path: hudarmat/frontpull
+        weight: 1
+      - path: hudarmat/frontpull/frontpull_end
+        weight: 1
+      - path: hudarmat/frontpull.001
+        weight: 1
+      - path: hudarmat/frontpull.001/frontpull.001_end
+        weight: 1
+      - path: hudarmat/l-pole
+        weight: 1
+      - path: hudarmat/l-pole/l-pole_end
+        weight: 1
+      - path: hudarmat/l-pole.001
+        weight: 1
+      - path: hudarmat/l-pole.001/l-pole.001_end
+        weight: 1
+      - path: hudarmat/l.armanfasser
+        weight: 1
+      - path: hudarmat/l.armanfasser/l.armanfasser_end
+        weight: 1
+      - path: hudarmat/l.footanfasser
+        weight: 1
+      - path: hudarmat/l.footanfasser/l.footanfasser_end
+        weight: 1
+      - path: hudarmat/middle-pullup
+        weight: 1
+      - path: hudarmat/middle-pullup/middle-pullup_end
+        weight: 1
+      - path: hudarmat/r.armanfasser
+        weight: 1
+      - path: hudarmat/r.armanfasser/r.armanfasser_end
+        weight: 1
+      - path: hudarmat/r.footanfasser
+        weight: 1
+      - path: hudarmat/r.footanfasser/r.footanfasser_end
+        weight: 1
+      - path: hudarmat/root
+        weight: 1
+      - path: hudarmat/root/root_end
+        weight: 1
+      - path: hudarmat/spinebot
+        weight: 1
+      - path: hudarmat/spinebot/l.obergaxe
+        weight: 1
+      - path: hudarmat/spinebot/l.obergaxe/r.unterhaxe.L
+        weight: 1
+      - path: hudarmat/spinebot/l.obergaxe/r.unterhaxe.L/l.fot
+        weight: 1
+      - path: hudarmat/spinebot/l.obergaxe/r.unterhaxe.L/l.fot/l.fot_end
+        weight: 1
+      - path: hudarmat/spinebot/r.obergaxe
+        weight: 1
+      - path: hudarmat/spinebot/r.obergaxe/r.unterhaxe.R
+        weight: 1
+      - path: hudarmat/spinebot/r.obergaxe/r.unterhaxe.R/r.fot
+        weight: 1
+      - path: hudarmat/spinebot/r.obergaxe/r.unterhaxe.R/r.fot/r.fot_end
+        weight: 1
+      - path: hudarmat/spinebot/spinebot.001
+        weight: 1
+      - path: hudarmat/spinebot/spinebot.001/spinebot.002
+        weight: 1
+      - path: hudarmat/spinebot/spinebot.001/spinebot.002/spinebot.003
+        weight: 1
+      - path: hudarmat/spinebot/spinebot.001/spinebot.002/spinebot.003/spinebot.004
+        weight: 1
+      - path: hudarmat/spinebot/spinebot.001/spinebot.002/spinebot.003/spinebot.004/spinebot.004_end
+        weight: 1
+      - path: hudarmat/spinebot/spinetop
+        weight: 1
+      - path: hudarmat/spinebot/spinetop/atem
+        weight: 1
+      - path: hudarmat/spinebot/spinetop/atem/atem_end
+        weight: 1
+      - path: hudarmat/spinebot/spinetop/l.clavic
+        weight: 0
+      - path: hudarmat/spinebot/spinetop/l.clavic/l.oberarm
+        weight: 0
+      - path: hudarmat/spinebot/spinetop/l.clavic/l.oberarm/l.ua
+        weight: 0
+      - path: hudarmat/spinebot/spinetop/l.clavic/l.oberarm/l.ua/l.hand
+        weight: 0
+      - path: hudarmat/spinebot/spinetop/l.clavic/l.oberarm/l.ua/l.hand/l.hand.001
+        weight: 0
+      - path: hudarmat/spinebot/spinetop/l.clavic/l.oberarm/l.ua/l.hand/l.hand.001/l.hand.001_end
+        weight: 1
+      - path: hudarmat/spinebot/spinetop/neq
+        weight: 1
+      - path: hudarmat/spinebot/spinetop/neq/hed
+        weight: 1
+      - path: hudarmat/spinebot/spinetop/neq/hed/hed_end
+        weight: 1
+      - path: hudarmat/spinebot/spinetop/r.clavic
+        weight: 1
+      - path: hudarmat/spinebot/spinetop/r.clavic/r.oberarm
+        weight: 1
+      - path: hudarmat/spinebot/spinetop/r.clavic/r.oberarm/r.ua
+        weight: 1
+      - path: hudarmat/spinebot/spinetop/r.clavic/r.oberarm/r.ua/r.hand
+        weight: 1
+      - path: hudarmat/spinebot/spinetop/r.clavic/r.oberarm/r.ua/r.hand/r.hand.001
+        weight: 0
+      - path: hudarmat/spinebot/spinetop/r.clavic/r.oberarm/r.ua/r.hand/r.hand.001/r.hand.001_end
+        weight: 1
+      - path: hudarmat/tailctr
+        weight: 1
+      - path: hudarmat/tailctr/tailctr_end
+        weight: 1
+      - path: Plane
+        weight: 0
+      maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
@@ -109,7 +239,7 @@ ModelImporter:
       takeName: hudarmat|SITT-THIS
       internalID: 0
       firstFrame: 1
-      lastFrame: 1.1
+      lastFrame: 74
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -138,7 +268,65 @@ ModelImporter:
       takeName: hudarmat|stand
       internalID: 0
       firstFrame: 1
-      lastFrame: 35
+      lastFrame: 37
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hudarmat|keepsitting
+      takeName: hudarmat|SITT-THIS
+      internalID: 0
+      firstFrame: 48
+      lastFrame: 176
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hudarmat|ley-stay
+      takeName: hudarmat|ley-THIS
+      internalID: 0
+      firstFrame: 113
+      lastFrame: 1168
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
