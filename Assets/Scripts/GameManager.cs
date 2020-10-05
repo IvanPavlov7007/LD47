@@ -18,13 +18,16 @@ public class GameManager : MonoBehaviour
 
     public int MaxLives, currentLives;
 
-    public List<Enemy> enemies;
-    public int maxEnemiesCount;
+    
 
-    [Header("Enemies")]
-    public GameObject EnemyPrefab;
-    GameObject enemiesFolder;
-    public float areaHalfSide, areaBroadness;
+    [Header("Mushrooms")]
+    public GameObject MushroomPrefab;
+    public List<Enemy> mushrooms;
+    public int maxMushroomsCount;
+    GameObject mushroomsFolder;
+    public float areaHalfSide, areaBroadness, minDistToDog, waitForSpawnNextMushMin, waitForSpawnNextMushMax;
+
+    RopeGod dog;
 
     void Awake()
     {
@@ -33,8 +36,30 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this);
         currentLives = MaxLives;
-        enemies = new List<Enemy>();
-        enemiesFolder = GameObject.Find("Enemies");
+        mushrooms = new List<Enemy>();
+        mushroomsFolder = GameObject.Find("Enemies");
+    }
+
+    [SerializeField]
+    bool crMushrooms = false;
+
+    private void Start()
+    {
+        dog = RopeGod.instance;
+    }
+
+    public void StartSpawningMushrooms()
+    {
+        StartCoroutine(SpawnMushrooms());
+    }
+
+    IEnumerator SpawnMushrooms()
+    {
+        while(true)
+        {
+            CreateMushroom();
+            yield return new WaitForSeconds(Random.Range(waitForSpawnNextMushMin,waitForSpawnNextMushMax));
+        }
     }
 
     private void Update()
@@ -43,30 +68,41 @@ public class GameManager : MonoBehaviour
         {
             Pause();
         }
-        scoreCounter.SetText(currentScore.ToString());
-        livesCounter.SetText(currentLives.ToString());
 
-        if(enemies.Count< maxEnemiesCount)
+        if(crMushrooms)
         {
-            CreateNewEnemy();
+            crMushrooms = false;
+            StartSpawningMushrooms();
         }
+        //scoreCounter.SetText(currentScore.ToString());
+        //livesCounter.SetText(currentLives.ToString());
+
+        //if(enemies.Count< maxEnemiesCount)
+        //{
+        //    CreateMushroom();
+        //}
     }
 
-    public void CreateNewEnemy()
+    public void CreateMushroom()
     {
-        float x = Random.Range(-1f,1f) * areaBroadness;
-        if (x > 0)
-            x += areaHalfSide;
-        else
-            x -= areaHalfSide;
+        //float x = Random.Range(-1f,1f) * areaBroadness;
+        //if (x > 0)
+        //    x += areaHalfSide;
+        //else
+        //    x -= areaHalfSide;
 
-        float y = Random.Range(-1f, 1f) * areaBroadness;
-        if (y > 0)
-            y += areaHalfSide;
-        else
-            y -= areaHalfSide;
+        //float y = Random.Range(-1f, 1f) * areaBroadness;
+        //if (y > 0)
+        //    y += areaHalfSide;
+        //else
+        //    y -= areaHalfSide;
 
-        Instantiate(EnemyPrefab, new Vector3(x, 2f, y), Quaternion.identity, enemiesFolder.transform);
+        Vector3 point = new Vector3(Random.Range(-1f, 1f) * areaHalfSide, 2f, Random.Range(-1f, 1f) * areaHalfSide);
+        Vector3 dist = transform.position - dog.position;
+        if (dist.magnitude < minDistToDog)
+            point += dist.normalized * minDistToDog;
+
+        Instantiate(MushroomPrefab, point, Quaternion.identity, mushroomsFolder.transform);
 
     }
 

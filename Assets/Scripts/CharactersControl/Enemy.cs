@@ -32,12 +32,12 @@ public class Enemy : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         anim.SetFloat(randHash, Random.Range(0f, 30f));
         dog = RopeGod.instance;
-        GameManager.instance.enemies.Add(this);
+        GameManager.instance.mushrooms.Add(this);
     }
 
     private void OnDestroy()
     {
-        GameManager.instance.enemies.Remove(this);
+        GameManager.instance.mushrooms.Remove(this);
     }
 
     private void Update()
