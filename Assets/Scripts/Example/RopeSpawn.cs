@@ -5,6 +5,7 @@ using UnityEngine;
 public class RopeSpawn : MonoBehaviour
 {
     public GameObject partPrefab, parentObject;
+    public Rigidbody boundedBody;
     public float partDistance = 0.21f;
     public int length;
     public bool snapFirst, snapLast, spawn;
@@ -32,7 +33,8 @@ public class RopeSpawn : MonoBehaviour
 
             if (i == 0)
             {
-                Destroy(temp.GetComponent<CharacterJoint>());
+                //Destroy(temp.GetComponent<CharacterJoint>());
+                temp.GetComponent<CharacterJoint>().connectedBody = boundedBody;
                 if (snapFirst)
                     temp.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             }

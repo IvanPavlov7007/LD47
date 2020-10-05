@@ -135,10 +135,10 @@ public class RopeGod : Node
         if (distToEnd < 0)
         {
             Vector3 pos = parent.position + ropeLengthVector.normalized * treeNode.AvailableRopeLength;
-            rb.position = new Vector3(pos.x, Mathf.Min(0.5f, rb.position.y), pos.z);
+            rb.position = new Vector3(pos.x, rb.position.y, pos.z);
         }
         velocity *= maxVelocity;
-        rb.velocity = new Vector3(velocity.x, Mathf.Min(0.5f,rb.velocity.y),velocity.z);
+        rb.velocity = new Vector3(velocity.x, rb.velocity.y,velocity.z);
 
         if (velocity.magnitude > 0.01f)
             lastRotationDir = velocity.normalized;

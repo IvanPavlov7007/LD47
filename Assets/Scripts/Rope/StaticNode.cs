@@ -41,10 +41,18 @@ public class StaticNode : Node
     const float fullDeg = 0.0027777f;
 
 
-    public virtual void Start()
+    protected virtual void Start()
     {
         if(rope == null)
             rope = Instantiate(GameManager.instance.RopeDrawerPrefab, transform).GetComponent<CableProceduralSimple>();
+        var cP = transform.Find("ConnectionPoint");
+        if (cP != null)
+        {
+            connectionPosition = cP;
+            rope.transform.position = connectionPosition.position;
+            if (parent != null)
+                (parent as StaticNode).UpdateRopeEndTransform();
+        }
         UpdateRopeEndTransform();
         rope.sagAmplitude = 0f;
         rope.gameObject.SetActive(true);
@@ -61,7 +69,7 @@ public class StaticNode : Node
         }
     }
 
-    public virtual void Awake()
+    protected virtual void Awake()
     {
         deltaLengthCoefficientAngles = 2 * Mathf.PI * radius * fullDeg;
     }

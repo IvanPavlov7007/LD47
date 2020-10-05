@@ -6,7 +6,7 @@ public class RootNode : StaticNode
 {
     public float RopeLength;
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         rg = child as RopeGod;
