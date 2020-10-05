@@ -20,7 +20,7 @@ public class StuckEnemyCheck : MonoBehaviour
         if (newNode.parent == lastNode && lastNode != newNode.parent)
             return;
 
-        transform.position = newNode.position + Vector3.up;
+        //transform.position = newNode.position + Vector3.up;
 
         List<Vector3> verts = new List<Vector3>();
         List<int> triangles = new List<int>();
@@ -53,13 +53,33 @@ public class StuckEnemyCheck : MonoBehaviour
 
         
         c.sharedMesh = f.mesh;
+
+        StartCoroutine(enableColliderForTime());
+        //StaticNode p = newNode as StaticNode;
+        //while (p.parent != null)
+        //{
+        //    p.DisconnectFromRope();
+        //    p = p.parent as StaticNode;
+        //}
+    }
+
+    bool canKill;
+
+    IEnumerator enableColliderForTime()
+    {
+        canKill = true;
+        yield return new WaitForSeconds(1f);
+        canKill = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         var m = other.GetComponentInParent<Mushroom>();
-        if (m != null)
+        if (m != null && canKill)
+        {
+            ParticlesManager.Explode(m.transform.position);
             Destroy(m.gameObject);
+        }
     }
 
 }

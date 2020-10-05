@@ -6257,6 +6257,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 407547103794896170, guid: 2aa35e4c55dbdea46b94e47d76893c97,
         type: 3}
+    - target: {fileID: 3970745296706144001, guid: 7d0f8a1584562d84eaff69319c10d764,
+        type: 3}
+      propertyPath: minDistToDog
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970745296706144001, guid: 7d0f8a1584562d84eaff69319c10d764,
+        type: 3}
+      propertyPath: areaHalfSide
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5517787868486688717, guid: 7d0f8a1584562d84eaff69319c10d764,
         type: 3}
       propertyPath: m_Name
@@ -6518,7 +6528,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736176237}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6566,7 +6576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736176237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.38373, y: 15.585762, z: 2.348257}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
