@@ -63,13 +63,18 @@ public class RopeGod : Node
         //speedSpinCollider = GameObject.Find("speedSpinCollider").transform;
         //speedSpinMinScale = speedSpinCollider.localScale;
         //speedSpinMaxScale = speedSpinMinScale * speedSpinMaxScaleDist;
-        StartCoroutine(WalkSound());
+        //StartCoroutine(WalkSound());
     }
 
     public override void SetParent(Node parent)
     {
         base.SetParent(parent);
         treeNode = parent as StaticNode;
+    }
+
+    public void PlayLegHitSound()
+    {
+        SoundManager.instance.PlaySound(walkS);
     }
 
     Vector3 TargetDir;
@@ -99,7 +104,7 @@ public class RopeGod : Node
             curIdleTime += Time.deltaTime;
         }
 
-        ableToMove = anim.GetCurrentAnimatorStateInfo(0).IsName("GettingUp");
+        ableToMove = !anim.GetCurrentAnimatorStateInfo(0).IsName("GettingUp");
 
         anim.SetBool(idleAnim, idle);
         anim.SetFloat(idleTimeAnim, curIdleTime / maxIdleTime);
