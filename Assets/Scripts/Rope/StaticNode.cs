@@ -177,6 +177,9 @@ public class StaticNode : Node
 
     void CreateNewStaticNode(Transform t, bool clockDirectionLeft)
     {
+        Node previousNode = t.transform.GetComponent<Node>();
+            
+
         enabled = false;
         StaticNode n = t.gameObject.AddComponent<StaticNode>();
         n.clockDirectionLeft = clockDirectionLeft;
@@ -185,5 +188,7 @@ public class StaticNode : Node
         n.SetChild(child);
         n.AllotRopeLength(AvailableRopeLength - (position - n.position).magnitude);
         SetChild(n);
+        if (previousNode != null)
+            StuckEnemyCheck.instance.CheckStuckEnemy(n, previousNode);
     }
 }

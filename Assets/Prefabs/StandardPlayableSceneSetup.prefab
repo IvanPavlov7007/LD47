@@ -775,10 +775,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 8037058149030141450}
-  RopeDrawerPrefab: {fileID: 0}
+  RopeDrawerPrefab: {fileID: 4065236567322441824, guid: a5cd7d0d78a684745a36af7da0db1040,
+    type: 3}
   nodePrefab: {fileID: 0}
+  scoreCounter: {fileID: 0}
+  livesCounter: {fileID: 0}
   currentScore: 0
   scoreMultiplier: 0
+  MaxLives: 5
+  currentLives: 0
+  MushroomPrefab: {fileID: 4622914401069004137, guid: 454730f92807885499e14410f53a57f7,
+    type: 3}
+  mushrooms: []
+  maxMushroomsCount: 5
+  areaHalfSide: 5
+  areaBroadness: 5
+  minDistToDog: 4
+  waitForSpawnNextMushMin: 4
+  waitForSpawnNextMushMax: 8
+  crMushrooms: 0
 --- !u!1 &7616949579526157192
 GameObject:
   m_ObjectHideFlags: 0
