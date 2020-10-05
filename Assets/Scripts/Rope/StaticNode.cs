@@ -48,6 +48,7 @@ public class StaticNode : Node
         var cP = transform.Find("ConnectionPoint");
         if (cP != null)
         {
+            cP.GetComponentInChildren<MeshRenderer>().enabled = true;
             connectionPosition = cP;
             rope.transform.position = connectionPosition.position;
             if (parent != null)
@@ -56,6 +57,11 @@ public class StaticNode : Node
         UpdateRopeEndTransform();
         rope.sagAmplitude = 0f;
         rope.gameObject.SetActive(true);
+    }
+
+    private void OnDestroy()
+    {
+        connectionPosition.GetComponentInChildren<MeshRenderer>().enabled = false;
     }
 
     public void UpdateRopeEndTransform()
@@ -105,7 +111,7 @@ public class StaticNode : Node
             //Debug.Log(clockDirDif);
         }
 
-        //currentAvailableRopeLength = currentAvailableRopeLength + dif;
+        currentAvailableRopeLength = currentAvailableRopeLength + dif;
 
         //Check Rotation direction and Disconnect from rope
         if(currentAvailableRopeLength > maxAvailableRopeLength + 0.1f)
