@@ -17,7 +17,8 @@ public static class IntersceneData
 
     public static void Quit()
     {
-        exit = true;
-        SceneManager.LoadScene("LoadingScene");
+        UnityEngine.Application.Quit();
+        //exit = true;
+        //SceneManager.LoadScene("LoadingScene");
     }
 }
