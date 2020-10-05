@@ -6,6 +6,7 @@ public class RopeGod : Node
 {
     public float initMaxVelocity, maxMaxVelocity, velocityCorrectingRandMargin, velocityGainLerp,  velocityChangeLerpValue = 0.3f, rotationLerpValue = 0.3f;
     public Transform SpineTop, Neck, lookTarget;
+    public bool lockOnTarget = false;
     [HideInInspector]
     public Rigidbody rb;
 
@@ -31,6 +32,11 @@ public class RopeGod : Node
     public static RopeGod instance;
     Animator anim;
     int speedAnim = Animator.StringToHash("Speed");
+    int idleTimeAnim = Animator.StringToHash("IdleTime");
+    int idleAnim = Animator.StringToHash("isIdle");
+    [Header("Dog animation"), SerializeField]
+    float maxIdleTime = 10f;
+    float curIdleTime;
 
 
     Transform speedSpinCollider;
@@ -68,6 +74,9 @@ public class RopeGod : Node
 
     Vector3 TargetDir;
 
+    bool idle;
+
+    bool ableToMove = true;
     void Update()
     {
 
@@ -75,18 +84,36 @@ public class RopeGod : Node
         vAxis = Input.GetAxis("Vertical");
         inputDirection = Vector3.Lerp(inputDirection, Quaternion.LookRotation(Vector3.Cross(Vector3.up, Vector3.Cross(mainCam.forward, Vector3.up)), Vector3.up) * (new Vector3(hAxis, 0f, vAxis)), velocityChangeLerpValue);
         if (inputDirection.magnitude < 0.01f)
+        {
+            idle = true;
             locked = false;
+        }
+        else
+        {
+            idle = false;
+            curIdleTime = 0f;
+        }
+
+        if(idle)
+        {
+            curIdleTime += Time.deltaTime;
+        }
+
+        ableToMove = anim.GetCurrentAnimatorStateInfo(0).IsName("GettingUp");
+
+        anim.SetBool(idleAnim, idle);
+        anim.SetFloat(idleTimeAnim, curIdleTime / maxIdleTime);
         anim.SetFloat(speedAnim, inputDirection.magnitude);
     }
 
     private void LateUpdate()
     {
-        
-        //Neck.rotation *= Quaternion.Euler(0,0,Vector3.Angle);
-        
 
-        SpineTop.transform.rotation *= Quaternion.Euler(Mathf.Lerp(0f, -10f, howNearEnd * inputDirection.magnitude), Mathf.Clamp(Vector3.SignedAngle(inputDirection, ropeLengthVector, Vector3.up) * inputDirection.magnitude * howNearEnd, - 45f,45f), 0f);
-            //* Quaternion.Lerp(Quaternion.identity, Quaternion.LookRotation(ropeLengthVector,Vector3.up), howNearEnd);
+        //Neck.rotation *= Quaternion.Euler(0,0,Vector3.Angle);
+
+        SpineTop.transform.rotation *= Quaternion.Euler(Mathf.Lerp(0f, -25f, howNearEnd * inputDirection.magnitude),
+            Mathf.Clamp(Vector3.SignedAngle(inputDirection, ropeLengthVector, Vector3.up) * inputDirection.magnitude * howNearEnd , - 45f,45f), 0f);//* (Vector3.Dot(inputDirection,lastRotationDir) > 0? 1f: -1f)
+                                                                                                                                                    //* Quaternion.Lerp(Quaternion.identity, Quaternion.LookRotation(ropeLengthVector,Vector3.up), howNearEnd);
     }
 
     [SerializeField]
@@ -152,7 +179,7 @@ public class RopeGod : Node
 
         //speedSpinCollider.localScale = Vector3.Lerp(speedSpinMinScale, speedSpinMaxScale, Mathf.InverseLerp(initMaxVelocity, maxMaxVelocity, maxVelocity));
 
-        if (treeNode.AvailableRopeLength < 1f && Twisting)
+        if (!ableToMove || (treeNode.AvailableRopeLength < 1f && Twisting))
         {
                 velocity = Vector3.zero;
         }
@@ -165,7 +192,9 @@ public class RopeGod : Node
         velocity *= maxVelocity;
         rb.velocity = new Vector3(velocity.x, rb.velocity.y,velocity.z);
 
-        if (velocity.magnitude > 0.01f)
+        if (lockOnTarget)
+            lastRotationDir = TargetDir;
+        else if (velocity.magnitude > 0.01f)
             lastRotationDir = velocity.normalized;
         rb.rotation = Quaternion.Lerp(rb.rotation, Quaternion.LookRotation(lastRotationDir, Vector3.up), rotationLerpValue);
     }
