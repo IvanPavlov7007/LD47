@@ -1,17 +1,26 @@
 fileFormatVersion: 2
-guid: 7684f69d979ce884a912d6171172953e
+guid: 1471709e746f0c84b85ee36f5a631a2c
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
+      74: 1761986900023282933
+    second: hudarmat|ley-THIS
+  - first:
       74: -9104028456187644356
     second: hudarmat|shittywalk
   - first:
-      74: -4167085888327604518
-    second: hudarmat|well
+      74: -2157143907476888617
+    second: hudarmat|SIT
+  - first:
+      74: 2470586115376398114
+    second: hudarmat|SITT-THIS
+  - first:
+      74: 8342030212563842090
+    second: hudarmat|stand
   externalObjects: {}
   materials:
-    materialImportMode: 1
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -29,7 +38,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 0
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -38,18 +47,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: hudarmat|shittywalk
-      takeName: hudarmat|shittywalk
+      name: hudarmat|ley-THIS
+      takeName: hudarmat|ley-THIS
       internalID: 0
-      firstFrame: 10
-      lastFrame: 45
+      firstFrame: 1
+      lastFrame: 28
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -62,108 +71,95 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Cylinder
-        weight: 0
-      - path: external-content.duckduckgo.com
-        weight: 0
-      - path: hudarmat
-        weight: 1
-      - path: hudarmat/l.armanfasser
-        weight: 1
-      - path: hudarmat/l.armanfasser/l.armanfasser_end
-        weight: 1
-      - path: hudarmat/l.footanfasser
-        weight: 1
-      - path: hudarmat/l.footanfasser/l.footanfasser_end
-        weight: 1
-      - path: hudarmat/r.armanfasser
-        weight: 1
-      - path: hudarmat/r.armanfasser/r.armanfasser_end
-        weight: 1
-      - path: hudarmat/r.footanfasser
-        weight: 1
-      - path: hudarmat/r.footanfasser/r.footanfasser_end
-        weight: 1
-      - path: hudarmat/root
-        weight: 1
-      - path: hudarmat/root/root_end
-        weight: 1
-      - path: hudarmat/root.001
-        weight: 1
-      - path: hudarmat/root.001/root.001_end
-        weight: 1
-      - path: hudarmat/root.002
-        weight: 1
-      - path: hudarmat/root.002/root.002_end
-        weight: 1
-      - path: hudarmat/spinebot
-        weight: 1
-      - path: hudarmat/spinebot/atem
-        weight: 1
-      - path: hudarmat/spinebot/atem/atem_end
-        weight: 1
-      - path: hudarmat/spinebot/l.obergaxe
-        weight: 1
-      - path: hudarmat/spinebot/l.obergaxe/r.unterhaxe.L
-        weight: 1
-      - path: hudarmat/spinebot/l.obergaxe/r.unterhaxe.L/l.fot
-        weight: 1
-      - path: hudarmat/spinebot/l.obergaxe/r.unterhaxe.L/l.fot/l.fot_end
-        weight: 1
-      - path: hudarmat/spinebot/r.obergaxe
-        weight: 1
-      - path: hudarmat/spinebot/r.obergaxe/r.unterhaxe.R
-        weight: 1
-      - path: hudarmat/spinebot/r.obergaxe/r.unterhaxe.R/r.fot
-        weight: 1
-      - path: hudarmat/spinebot/r.obergaxe/r.unterhaxe.R/r.fot/r.fot_end
-        weight: 1
-      - path: hudarmat/spinebot/spinebot.001
-        weight: 1
-      - path: hudarmat/spinebot/spinebot.001/spinebot.002
-        weight: 1
-      - path: hudarmat/spinebot/spinebot.001/spinebot.002/spinebot.003
-        weight: 1
-      - path: hudarmat/spinebot/spinebot.001/spinebot.002/spinebot.003/spinebot.003_end
-        weight: 1
-      - path: hudarmat/spinebot/spinetop
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/l.clavic
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/l.clavic/l.oberarm
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/l.clavic/l.oberarm/l.ua
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/l.clavic/l.oberarm/l.ua/l.hand
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/l.clavic/l.oberarm/l.ua/l.hand/l.hand.001
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/l.clavic/l.oberarm/l.ua/l.hand/l.hand.001/l.hand.001_end
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/neq
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/neq/hed
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/neq/hed/hed_end
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/r.clavic
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/r.clavic/r.oberarm
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/r.clavic/r.oberarm/r.ua
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/r.clavic/r.oberarm/r.ua/r.hand
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/r.clavic/r.oberarm/r.ua/r.hand/r.hand.001
-        weight: 1
-      - path: hudarmat/spinebot/spinetop/r.clavic/r.oberarm/r.ua/r.hand/r.hand.001/r.hand.001_end
-        weight: 1
-      - path: Plane
-        weight: 1
-      maskType: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hudarmat|shittywalk
+      takeName: hudarmat|shittywalk
+      internalID: 0
+      firstFrame: 1
+      lastFrame: 36
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hudarmat|SITT-THIS
+      takeName: hudarmat|SITT-THIS
+      internalID: 0
+      firstFrame: 1
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hudarmat|stand
+      takeName: hudarmat|stand
+      internalID: 0
+      firstFrame: 1
+      lastFrame: 35
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     isReadable: 0
@@ -216,7 +212,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: root
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
@@ -224,7 +220,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
