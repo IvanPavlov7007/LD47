@@ -61,7 +61,7 @@ public class StaticNode : Node
 
     private void OnDestroy()
     {
-        connectionPosition.GetComponentInChildren<MeshRenderer>().enabled = false;
+        connectionPosition.GetComponentInChildren<MeshRenderer>(true).enabled = false;
     }
 
     public void UpdateRopeEndTransform()
@@ -93,7 +93,8 @@ public class StaticNode : Node
     {
         parent.SetChild(child);
         child.SetParent(parent);
-        Destroy(rope.gameObject);
+        if(rope != null)
+            Destroy(rope.gameObject);
         Destroy(this);
     }
     
@@ -177,6 +178,9 @@ public class StaticNode : Node
 
     void CreateNewStaticNode(Transform t, bool clockDirectionLeft)
     {
+        Node previousNode = t.transform.GetComponent<Node>();
+            
+
         enabled = false;
         StaticNode n = t.gameObject.AddComponent<StaticNode>();
         n.clockDirectionLeft = clockDirectionLeft;
@@ -185,5 +189,7 @@ public class StaticNode : Node
         n.SetChild(child);
         n.AllotRopeLength(AvailableRopeLength - (position - n.position).magnitude);
         SetChild(n);
+        if (previousNode != null)
+            StuckEnemyCheck.instance.CheckStuckEnemy(n, previousNode);
     }
 }

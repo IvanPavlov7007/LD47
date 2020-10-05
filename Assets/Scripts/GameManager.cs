@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         dog = RopeGod.instance;
+        StartSpawningMushrooms();
     }
 
     public void StartSpawningMushrooms()
@@ -69,11 +70,11 @@ public class GameManager : MonoBehaviour
             Pause();
         }
 
-        if(crMushrooms)
-        {
-            crMushrooms = false;
-            StartSpawningMushrooms();
-        }
+        //if(crMushrooms)
+        //{
+        //    crMushrooms = false;
+        //    StartSpawningMushrooms();
+        //}
         //scoreCounter.SetText(currentScore.ToString());
         //livesCounter.SetText(currentLives.ToString());
 
