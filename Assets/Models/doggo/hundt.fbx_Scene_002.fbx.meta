@@ -51,7 +51,7 @@ ModelImporter:
       takeName: hudarmat|ley-THIS
       internalID: 0
       firstFrame: 1
-      lastFrame: 28
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -87,7 +87,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -109,7 +109,7 @@ ModelImporter:
       takeName: hudarmat|SITT-THIS
       internalID: 0
       firstFrame: 1
-      lastFrame: 23
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
