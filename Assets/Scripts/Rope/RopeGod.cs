@@ -5,7 +5,8 @@ using UnityEngine;
 public class RopeGod : Node
 {
     public float initMaxVelocity, maxMaxVelocity, velocityCorrectingRandMargin, velocityGainLerp,  velocityChangeLerpValue = 0.3f, rotationLerpValue = 0.3f;
-    public Transform SpineTop, lookTarget;
+    public Transform SpineTop, Neck, lookTarget;
+    [HideInInspector]
     public Rigidbody rb;
 
     public float maxVelocity;
@@ -65,8 +66,11 @@ public class RopeGod : Node
         treeNode = parent as StaticNode;
     }
 
+    Vector3 TargetDir;
+
     void Update()
     {
+
         hAxis = Input.GetAxis("Horizontal");
         vAxis = Input.GetAxis("Vertical");
         inputDirection = Vector3.Lerp(inputDirection, Quaternion.LookRotation(Vector3.Cross(Vector3.up, Vector3.Cross(mainCam.forward, Vector3.up)), Vector3.up) * (new Vector3(hAxis, 0f, vAxis)), velocityChangeLerpValue);
@@ -77,6 +81,10 @@ public class RopeGod : Node
 
     private void LateUpdate()
     {
+        
+        //Neck.rotation *= Quaternion.Euler(0,0,Vector3.Angle);
+        
+
         SpineTop.transform.rotation *= Quaternion.Euler(Mathf.Lerp(0f, -10f, howNearEnd * inputDirection.magnitude), Mathf.Clamp(Vector3.SignedAngle(inputDirection, ropeLengthVector, Vector3.up) * inputDirection.magnitude * howNearEnd, - 45f,45f), 0f);
             //* Quaternion.Lerp(Quaternion.identity, Quaternion.LookRotation(ropeLengthVector,Vector3.up), howNearEnd);
     }
@@ -118,6 +126,9 @@ public class RopeGod : Node
         if (Vector3.Dot(newtangentalVector, tangentalVector) < 0f)
             maxVelocity = initMaxVelocity;
         tangentalVector = newtangentalVector;
+
+        TargetDir = lookTarget.position - transform.position;
+
         Vector3 velocity = inputDirection;
 
         distToEnd = treeNode.AvailableRopeLength - ropeLengthVector.magnitude;
